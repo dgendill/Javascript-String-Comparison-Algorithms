@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC
+  "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Fuzzy Search</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script type="text/javascript" src="string-compare.js"></script>  
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		function compareStrings(string1, string2) {
+			var jwDistance = fuzzySearch.jwDistance(string1,string2);
+			var jaroDistance = fuzzySearch.jaroDistance(string1,string2);
+			var lsDistance = fuzzySearch.lsDistance(string1,string2);
+			var output = "<p>Jarro Distance: " + jaroDistance + "</p>";
+			output += "<p>Jarro-Winkler Distance: " + jwDistance + "</p>";
+			output += "<p>Levenshtein Distance: " + lsDistance + "</p>";
+			
+			$('#results').html(output);			
+		}
+		
+		$('input[type=button]').click(function() {
+			var value1 = $('.value1').val();
+			var value2 = $('.value2').val();
+			compareStrings(value1,value2);	
+		});
+		
+	});
+	
+</script>
+</head>
+<body>
+
+<div class="container">
+	
+	<form>
+		<input class="value1" value="dixon" type="text"/>
+		<input class="value2" value="dicksonx" type="text"/>
+		<input type="button" value="Compare"/>
+	</form>
+	
+	<div id="results">
+		
+	</div>
+</div>
+
+</body>
+</html>
